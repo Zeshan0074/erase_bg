@@ -8,6 +8,7 @@ import {
 } from 'reactstrap';
 import logo from "../../assets/img/logo.png";
 import { logout } from '../../store/actions/authAction';
+import { MdOutlineLogout } from "react-icons/md";
 function NavDropDown() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -29,8 +30,15 @@ function NavDropDown() {
           </div>
         </DropdownToggle>
         <DropdownMenu>
-          <div className="hidden rounded-[50px] md:flex items-start">
-            <button onClick={handleLogout} className='px-6 py-2 bg-primary rounded-lg text-white font-bold ml-1'>Logout</button>
+          <div className=" ">
+            
+            <button
+            onClick={handleLogout} 
+            className='px-2 flex  items-center gap-x-3 rounded-lg text-primary text-lg font-bold ml-1'>
+            Logout
+            <MdOutlineLogout className='text-primary'/>
+            </button>
+          
           </div>
         </DropdownMenu>
       </Dropdown>

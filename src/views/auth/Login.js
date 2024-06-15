@@ -5,10 +5,13 @@ import { FcGoogle } from 'react-icons/fc';
 import { auth } from '../../config/firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/actions/authAction';
-import {Spinner} from "reactstrap"
+import { Spinner } from "reactstrap"
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom';
+import toast from 'react-hot-toast';
 function Login() {
   const { loading } = useSelector((state) => state?.user);
+  const { user } = useSelector((state) => state.authUser);
+
   const initialState = {
     email: "",
     password: "",
@@ -39,10 +42,9 @@ function Login() {
     };
     dispatch(
       login(payload, () => {
-      
         history.push("/");
       })
-    );  
+    );
   };
 
 
@@ -54,6 +56,7 @@ function Login() {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider)
   }
+
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
@@ -96,7 +99,7 @@ function Login() {
           </div>
 
           <div className="flex flex-col items-start gap-y-5 justify-between">
-            <a href="#" className="text-primary hover:underline">Forgot Password?</a>
+            <Link to="/auth/forgetemail" className="text-primary hover:underline">Forget Password?</Link>
             <button
               type="submit"
               className="bg-primary text-white w-full font-semibold text-lg px-4 py-2 rounded-lg hover:bg-primary focus:outline-none focus:ring-2 focus:ring-primary"
@@ -117,9 +120,9 @@ function Login() {
         </div>
         {/* This div is for contnue with google */}
         <div className='flex justify-center mt-4 mx-auto'>
-          <button className='flex flex-row items-center border-2  border-primary px-2 py-1 rounded-full'
+          <button className='flex flex-row items-center border-2  border-primary px-3  py-2 font-semibold rounded-full'
             onClick={GoogleSignin}>
-            Continue with Google  <FcGoogle size={20} className='mx-3' />
+            Continue with Google  <FcGoogle size={20} className='mx-1' />
           </button>
         </div>
 

@@ -163,9 +163,10 @@ function Signup() {
           Or
         </div>
         <div className='flex justify-center mt-4 mx-auto'>
-          <button className='flex flex-row items-center border-2  border-primary px-2 py-1 rounded-full'
-            onClick={GoogleSignin}>
-            Continue with Google  <FcGoogle size={20} className='mx-3' />
+          <button
+           className='flex flex-row items-center border-2  border-primary px-3  py-2 font-semibold rounded-full'
+           onClick={GoogleSignin}>
+            Continue with Google  <FcGoogle size={20} className='mx-1' />
           </button>
         </div>
 
