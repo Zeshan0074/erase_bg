@@ -11,20 +11,24 @@ export const signup = (payload, onSuccess) => async (dispatch) => {
 
         if (data.status === 200 ) {
             dispatch(loginLoading(false));
-            toast.success("We have sent you an OTP on your email");
-            // toast.success(data.status?.details?.details );
-            // toast.success(data?.details)
+            onSuccess();
+            // toast.success(data.status?.details?.details)
+            toast.success("We have sent you an email for OTP")
             // console.log("Data details is here:", data.details)
             // dispatch({ type: "LOGIN", payload: data.detail });
-            onSuccess();
         } else {
             // toast.error(data.data?.detail);
-            toast.error("Server error")
             dispatch(loginLoading(false));
+            console.log("ARe you in else block")
+            // onError();
+            toast.error(data.status?.message?.message)
+            // console.log("Error while signup: ", data.status?.message?.message)
+            // toast.error("Something went wrong")
         }
     } catch (error) {
         console.error("Sorry you missing or mismatch some fileds");
         dispatch(loginLoading(false));
+        toast.error("Something went wrong")
     }
 };
 
@@ -97,13 +101,11 @@ export const login = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
         const { data } = await auth.login(payload);
-        if (data.status === 200 ) {
+        if (data?.status === 200 ) {
             dispatch({ type: "LOGIN", payload: data.details });
             dispatch(loginLoading(false));
-            toast.success("User Login Successfully.");
-
             onSuccess();
-            
+            toast.success("User Login Successfully.");            
         } else {
             toast(data.details);
             dispatch(loginLoading(false));
@@ -111,6 +113,7 @@ export const login = (payload, onSuccess) => async (dispatch) => {
     } catch (error) {
         console.error("Sorry you missing or mismatch some fileds");
         dispatch(loginLoading(false));
+        toast.error("Invalid Credentials")
     }
 };
 
