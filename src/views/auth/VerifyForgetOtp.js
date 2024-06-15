@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {  useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { MdMarkEmailRead } from "react-icons/md";
-import { verifyotp } from '../../store/actions/authAction';
+import { MdMarkEmailUnread } from "react-icons/md";
+import { verifyforgetotp } from '../../store/actions/authAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from 'reactstrap';
 const VerifyEmail = () => {
@@ -12,9 +12,8 @@ const VerifyEmail = () => {
 
   const [email, setEmail] = useState();
 
-
   useEffect(() => {
-    const storedEmail = localStorage.getItem('userEmail');
+    const storedEmail = localStorage.getItem('forgetEmail');
     if (storedEmail) {
       setEmail(storedEmail);
     }
@@ -50,20 +49,20 @@ const VerifyEmail = () => {
       otp: otpString,
     };
     dispatch(
-      verifyotp(payload, () => {
-        history.push("/auth/login");
+      verifyforgetotp(payload, () => {
+        history.push("/auth/forgetpassword");
       })
     );
   };
   return (
     <div className="flex items-center justify-center min-h-screen  bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full md:w-[600px]">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center justify-center">
           <div className="text-primary mb-4">
-            <MdMarkEmailRead size={60} />
+            <MdMarkEmailUnread size={60} />
           </div>
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Please check your email</h2>
-          <p className="text-gray-600 mb-6">We've sent a code to <b>{email}</b></p>
+          <p className="text-gray-600 mb-6">We've sent a reset password code</p>
           <form onSubmit={(e)=>{handleSubmit(e)}}>
             <div className="flex space-x-2 mb-6 w-full justify-center items-center">
 

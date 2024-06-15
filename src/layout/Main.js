@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 const Main = (props) => {
   const { user } = useSelector((state) => state.authUser);
   const history = useHistory();
-  console.log("Token is here:", user)
   useEffect(() => {
       if (!user?.token) {
           history.push("/auth/login");

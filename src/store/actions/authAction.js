@@ -11,13 +11,15 @@ export const signup = (payload, onSuccess) => async (dispatch) => {
 
         if (data.status === 200 ) {
             dispatch(loginLoading(false));
-            console.log("DAta form the auth action: ",data)
-
+            toast.success("We have sent you an OTP on your email");
+            // toast.success(data.status?.details?.details );
+            // toast.success(data?.details)
+            // console.log("Data details is here:", data.details)
             // dispatch({ type: "LOGIN", payload: data.detail });
             onSuccess();
         } else {
             // toast.error(data.data?.detail);
-            toast.error("Tha API is not hit successfully")
+            toast.error("Server error")
             dispatch(loginLoading(false));
         }
     } catch (error) {
@@ -27,16 +29,58 @@ export const signup = (payload, onSuccess) => async (dispatch) => {
 };
 
 
-// THis actioin is for VerifyOTP
+// THis actiin is for VerifyOTP
 export const verifyotp = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
         const { data } = await auth.verifyotp(payload);
         if (data.status === 200) {
-            onSuccess();
             dispatch(loginLoading(false));
+            toast.success("OTP verified Successfully.");
+            onSuccess();
+
 
             // toast(data.detail);
+        } else {
+            // toast(data.detail);
+            dispatch(loginLoading(false));
+            toast.error("OTP cannot verified.");
+
+        }
+    } catch (error) {
+        console.error("Sorry!");
+        dispatch(loginLoading(false));
+    }
+};
+// THis actioin is for VerifyOTP
+export const verifyforgetotp = (payload, onSuccess) => async (dispatch) => {
+    await dispatch(loginLoading(true));
+    try {
+        const { data } = await auth.verifyforgetotp(payload);
+        if (data.status === 200) {
+            dispatch(loginLoading(false));
+            // toast.status()
+            onSuccess();
+
+            // toast(data.detail);
+        } else {
+            // toast(data.detail);
+            dispatch(loginLoading(false));
+        }
+    } catch (error) {
+        console.error("Sorry!");
+        dispatch(loginLoading(false));
+    }
+};
+// THis actioin is for VerifyOTP
+export const forgetPassword = (payload, onSuccess) => async (dispatch) => {
+    await dispatch(loginLoading(true));
+    try {
+        const { data } = await auth.forgetPassword(payload);
+        if (data.status === 200) {
+            dispatch(loginLoading(false));
+            toast.success("OTP sent to your registered email");
+            onSuccess();
         } else {
             // toast(data.detail);
             dispatch(loginLoading(false));
@@ -56,8 +100,10 @@ export const login = (payload, onSuccess) => async (dispatch) => {
         if (data.status === 200 ) {
             dispatch({ type: "LOGIN", payload: data.details });
             dispatch(loginLoading(false));
+            toast.success("User Login Successfully.");
+
             onSuccess();
-            toast("Login Successfully.");
+            
         } else {
             toast(data.details);
             dispatch(loginLoading(false));
@@ -69,12 +115,31 @@ export const login = (payload, onSuccess) => async (dispatch) => {
 };
 
 
+// THis actioin is for ForgetEmail
+export const forgetemail = (payload, onSuccess) => async (dispatch) => {
+    await dispatch(loginLoading(true));
+    try {
+        const { data } = await auth.forgetemail(payload);
+        if (data.status === 200) {
+            onSuccess();
+            dispatch(loginLoading(false));
+
+            // toast(data.detail);
+        } else {
+            // toast(data.detail);
+            dispatch(loginLoading(false));
+        }
+    } catch (error) {
+        console.error("Sorry!");
+        dispatch(loginLoading(false));
+    }
+}
 export const logout = (onSuccess) => async (dispatch) => {
     try {
         localStorage.clear();
         dispatch({ type: "LOGOUT" });
         // onSuccess();
-        toast("Logout Successfully.");
+        toast.success("Logout Successfully.");
     } catch (error) {
         toast(error.message);
     }
