@@ -9,7 +9,6 @@ import Stats from '../components/dashboard/Stats';
 const AdminView = () => {
   return (
     <Router>
-
       <Switch>
         <Route exact path="/" component={PurchasedApi} />
         <Route exact path="/payment-cards" component={PaymentCards} />
