@@ -28,7 +28,7 @@
 // }
 
 const initialData = {
-  laoding: false,
+  loading: false,
 };
 const authReducer = (state = initialData, action) => {
   switch (action.type) {

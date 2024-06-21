@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Starter from "../../assets/img/Starter.png";
 import Plus from "../../assets/img/Plus.png";
 import Premium from "../../assets/img/Premium.png";
 import { IoIosCheckmarkCircle } from "react-icons/io";
-
+import Paypal from '../Paypal';
 const plans = [
   {
     name: 'Starter',
@@ -26,7 +26,15 @@ const plans = [
 ];
 
 const PricingTable = () => {
+  const [checkout,setCheckOut] = useState(false)
+  const handleCheckOut=()=>
+    {
+      setCheckOut(true)
+    }
   return (
+    <>
+    {checkout === true ? <><Paypal/></>: 
+    (
     <div className="flex flex-wrap gap-6 justify-center items-center min-h-screen bg-gray-100  w-full">
       {plans.map((plan, index) => (
         <div 
@@ -51,12 +59,13 @@ const PricingTable = () => {
               </div>
             ))}
           </ul>
-          <button className="bg-primary text-white mt-20 w-full py-2 px-4 rounded-full  transition duration-300">Purchase Now</button>
+          <button className="bg-primary text-white mt-20 w-full py-2 px-4 rounded-full  transition duration-300" onClick={handleCheckOut}>Purchase Now</button>
         </div>
       ))}
-    </div>
-  );
-};
+    </div>)}
+    </>
+  )
+}
 
 export default PricingTable;
 
