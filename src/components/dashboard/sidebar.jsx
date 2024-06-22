@@ -1,5 +1,6 @@
 
-import { Link } from '@mui/material';
+import { Link } from 'react-router-dom';
+
 import React from 'react'
 import { SiFastapi } from "react-icons/si"
 import { IoIosStats } from "react-icons/io";
@@ -21,10 +22,10 @@ const Sidebar = () => {
 
         {/*Container To Show Catogery of Icons when Click by Toggle*/}
         <div className={`w-52  h-full overflow-hidden md:overflow-auto bg-white min-h-full border-r border-neutral-200 flex-col justify-start items-start gap-10 inline-flex pl-2 pt-10`}>
-          <Link className=' text-decoration-none   ' href='/' > <h1 className=' text-black p-2 px-3 hover:bg-[#25bbe934] w-[180px]  rounded-md flex gap-2 font-semibold text-md items-center   cursor-pointer'> <SiFastapi size={20} className=' text-primary' />Purchased API </h1></Link>
-          <Link className=' text-decoration-none   ' href='/payment-cards'> <h1 className=' text-black flex p-2 px-3 hover:bg-[#25bbe934] w-[180px] rounded-md gap-2 font-semibold text-md items-center   cursor-pointer'> <PiEraserFill size={20} className=' text-primary' />Erase BG </h1></Link>
-          <Link className=' text-decoration-none  ' href='/stats'> <h1 className=' text-black flex p-2 px-3 hover:bg-[#25bbe934] w-[180px] rounded-md gap-2 font-semibold text-md items-center   cursor-pointer'> <IoIosStats size={20} className=' text-primary' /> Stats</h1></Link>
-          <Link className=' text-decoration-none  ' href="/api-documentation"> <h1 className=' text-black flex p-2 px-3 hover:bg-[#25bbe934] w-[180px] rounded-md gap-2 font-semibold text-md items-center   cursor-pointer'> <HiDocumentMagnifyingGlass size={20} className=' text-primary' /> Docs</h1></Link>
+          <Link className=' text-decoration-none   ' to='/' > <h1 className=' text-black p-2 px-3 hover:bg-[#25bbe934] w-[180px]  rounded-md flex gap-2 font-semibold text-md items-center   cursor-pointer'> <SiFastapi size={20} className=' text-primary' />Purchased API </h1></Link>
+          <Link className=' text-decoration-none   ' to='/payment-cards'> <h1 className=' text-black flex p-2 px-3 hover:bg-[#25bbe934] w-[180px] rounded-md gap-2 font-semibold text-md items-center   cursor-pointer'> <PiEraserFill size={20} className=' text-primary' />Erase BG </h1></Link>
+          <Link className=' text-decoration-none  '  to='/stats'> <h1 className=' text-black flex p-2 px-3 hover:bg-[#25bbe934] w-[180px] rounded-md gap-2 font-semibold text-md items-center   cursor-pointer'> <IoIosStats size={20} className=' text-primary' /> Stats</h1></Link>
+          <Link className=' text-decoration-none  '  to="/api-documentation"> <h1 className=' text-black flex p-2 px-3 hover:bg-[#25bbe934] w-[180px] rounded-md gap-2 font-semibold text-md items-center   cursor-pointer'> <HiDocumentMagnifyingGlass size={20} className=' text-primary' /> Docs</h1></Link>
 
         </div>
       </div>
