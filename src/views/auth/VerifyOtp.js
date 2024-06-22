@@ -56,8 +56,8 @@ const VerifyEmail = () => {
     );
   };
   return (
-    <div className="flex items-center justify-center min-h-screen  bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full md:w-[600px]">
+    <div className="flex items-center justify-center min-h-screen  bg-zinc-300">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full md:w-[600px]">
         <div className="flex flex-col items-center">
           <div className="text-primary mb-4">
             <MdMarkEmailRead size={60} />

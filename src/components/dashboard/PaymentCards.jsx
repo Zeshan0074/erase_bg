@@ -23,7 +23,7 @@ const plans = [
     email: "15 email accounts",
     space: "100GB Space",
     img: Plus,
-    subscription: "100 images for 15$",
+    subscription: "500 images for 15$",
   },
   {
     name: 'Premium',
@@ -32,7 +32,7 @@ const plans = [
     email: "15 email accounts",
     space: "100GB Space",
     img: Premium,
-    subscription: "100 images for 25$",
+    subscription: "1000 images for 25$",
   },
 ];
 

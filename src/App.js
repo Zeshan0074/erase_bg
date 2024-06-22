@@ -10,6 +10,7 @@ function App() {
     return (
         <>
             <Provider store={store}>
+                <Toaster/>
                 <BrowserRouter>
                     <Switch>
                         {routes.map((route) => {
@@ -29,7 +30,6 @@ function App() {
                                                 <Auth>
                                                     <route.component />
                                                 </Auth>
-                                                <Toaster/>
                                             </Route>
                                        
                                     );

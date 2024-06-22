@@ -6,9 +6,9 @@ import {
   DropdownToggle,
   DropdownMenu,
 } from 'reactstrap';
-import logo from "../../assets/img/logo.png";
 import { logout } from '../../store/actions/authAction';
 import { MdOutlineLogout } from "react-icons/md";
+import { FaUserCircle } from 'react-icons/fa';
 function NavDropDown() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -26,19 +26,20 @@ function NavDropDown() {
       <Dropdown isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle className='bg-transparent border-none shadow-none w-fit'>
           <div className="flex gap-8 items-center">
-            <img className='w-11 h-11 rounded-full' src={logo} alt="" />
+            {/* <img className='w-11 h-11 rounded-full' src={logo} alt="" /> */}
+            <FaUserCircle className='text-primary' size={35} />
+
           </div>
         </DropdownToggle>
         <DropdownMenu>
-          <div className=" ">
-            
+          <div className="h-full">
             <button
-            onClick={handleLogout} 
-            className='px-2 flex  items-center gap-x-3 rounded-lg text-primary text-lg font-bold ml-1'>
-            Logout
-            <MdOutlineLogout className='text-primary'/>
+              onClick={handleLogout}
+              className='px-2 flex  items-center gap-x-3 rounded-lg text-primary text-lg font-bold ml-1'>
+              Logout
+              <MdOutlineLogout className='text-primary' />
             </button>
-          
+
           </div>
         </DropdownMenu>
       </Dropdown>
