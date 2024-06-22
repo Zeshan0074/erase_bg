@@ -20,12 +20,12 @@ const ApiDocumentation = () => {
           <p className="text-gray-600 mb-6">
             Your API key is used to authenticate your requests. Please keep it secret and do not expose it publicly.
           </p>
-          <div className="bg-gray-100 p-4 rounded-lg border border-gray-200 mb-6">
+          {/* <div className="bg-gray-100 p-4 rounded-lg border border-gray-200 mb-6">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <span className="text-gray-600">Your API Key:</span>
               <span className="bg-gray-200 text-gray-800 py-1 px-3 rounded">********************</span>
             </div>
-          </div>
+          </div> */}
 
           <h2 className="text-xl font-semibold mb-4">Endpoints</h2>
 

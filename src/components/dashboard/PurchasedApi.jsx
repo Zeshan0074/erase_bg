@@ -10,9 +10,9 @@ const ApiKeySetup = () => {
           <div className="flex gap
           -y-3 md:flex-row flex-col justify-between items-center mb-2">
             <h2 className="text-xl font-bold">API Keys</h2>
-            <button className="bg-primary text-white text-sm font-semibold py-1 px-4 rounded hover:bg-gray-400">
+            {/* <button className="bg-primary text-white text-sm font-semibold py-1 px-4 rounded hover:bg-gray-400">
               Create New Secret Key
-            </button>
+            </button> */}
           </div>
           <p className="text-gray-500 mb-4">
             Make sure to keep your keys secret and never expose them.

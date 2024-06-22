@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { RepositoryFactory } from "../../repository/RepositoryFactory";
 var auth = RepositoryFactory.get("auth");
 
-// // This action is for Signup
+// This action is for Signup
 export const signup = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
 
@@ -12,11 +12,10 @@ export const signup = (payload, onSuccess) => async (dispatch) => {
         if (data.status === 200 ) {
             dispatch(loginLoading(false));
             onSuccess();
-            // console.log(data?.details)
             toast.success(data?.details)
         } else {
             dispatch(loginLoading(false));
-            toast.error(data?.details)
+            dispatch(toast.error(data?.message)) 
         }
     } catch (error) {
         console.error("Sorry you missing or mismatch some fileds");
@@ -24,6 +23,32 @@ export const signup = (payload, onSuccess) => async (dispatch) => {
         // toast.error("Something went wrong")
     }
 };
+
+// export const signup = (payload, onSuccess) => async (dispatch) => {
+//     dispatch(loginLoading(true));
+
+//     try {
+//         const { data } = await auth.signup(payload);
+
+//         if (data.status === 200) {
+//             dispatch(loginLoading(false));
+//             onSuccess();
+//             toast.success(data?.details);
+//         } else {
+//             dispatch(loginLoading(false));
+//             toast.error(data?.message);
+//         }
+//     } catch (error) {
+//         dispatch(loginLoading(false));
+        
+//         // Check if the error response has a message from the backend
+//         if (data.message) {
+//             toast.error(data.message);
+//         } else {
+//             // toast.error("Something went wrong. Please try again.");
+//         }
+//     }
+// };
 
 
 // THis actiin is for VerifyOTP
@@ -97,11 +122,10 @@ export const login = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
         const {data} = await auth.login(payload);
-        // console.log("Login Status",data?.message)
         if (data?.status === 200 ) { 
             dispatch({ type: "LOGIN", payload: data.details });
             dispatch(loginLoading(false));
-            toast.success(data?.message || "successs") 
+            toast.success(data?.message) 
               
             onSuccess();
             console.log("login Toast",data?.message)
@@ -112,7 +136,7 @@ export const login = (payload, onSuccess) => async (dispatch) => {
     } catch (error) {
         console.error("Sorry you missing or mismatch some fileds");
         dispatch(loginLoading(false));
-        toast.error("Invalid Credentials")
+        // toast.error("Invalid Credentials")
     }
 };
 
