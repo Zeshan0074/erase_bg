@@ -1,5 +1,6 @@
 import axios from "axios";
 const baseDomain = "https://amazingly-sought-snapper.ngrok-free.app";
+// const baseDomain = "http://192.168.18.26:8000/";
 
 const baseURL = `${baseDomain}`;
 

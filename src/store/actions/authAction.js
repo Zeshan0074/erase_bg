@@ -60,15 +60,16 @@ export const verifyotp = (payload, onSuccess) => async (dispatch) => {
 export const verifyforgetotp = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
-        const { data } = await auth.verifyforgetotp(payload);
+        const {data} = await auth.verifyforgetotp(payload);
+        console.log("Data of Forget",data)
         if (data.status === 200) {
             dispatch(loginLoading(false));
             // toast.status()
             onSuccess();
-
-            // toast(data.detail);
+            
+            toast.success(data?.details);
         } else {
-            // toast(data.detail);
+            toast.error(data?.details);
             dispatch(loginLoading(false));
         }
     } catch (error) {
@@ -80,8 +81,8 @@ export const verifyforgetotp = (payload, onSuccess) => async (dispatch) => {
 export const forgetPassword = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
-        const { data } = await auth.forgetPassword(payload);
-        if (data.status === 200) {
+        const {data} = await auth.forgetPassword(payload);
+        if (data?.status === 200) {
             dispatch(loginLoading(false));
             toast.success("OTP sent to your registered email");
             onSuccess();
@@ -107,7 +108,7 @@ export const login = (payload, onSuccess) => async (dispatch) => {
             onSuccess();
             toast.success("User Login Successfully.");            
         } else {
-            toast(data.details);
+            toast.error(data.details);
             dispatch(loginLoading(false));
         }
     } catch (error) {
@@ -122,14 +123,14 @@ export const login = (payload, onSuccess) => async (dispatch) => {
 export const forgetemail = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
-        const { data } = await auth.forgetemail(payload);
-        if (data.status === 200) {
+        const {data} = await auth.forgetemail(payload);
+        if (data?.status === 200) {
+            toast.success(data?.details);
             onSuccess();
             dispatch(loginLoading(false));
 
-            // toast(data.detail);
         } else {
-            // toast(data.detail);
+            toast.error(data.details);
             dispatch(loginLoading(false));
         }
     } catch (error) {
