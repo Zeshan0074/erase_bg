@@ -1,13 +1,14 @@
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import toast from 'react-hot-toast';
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from '../../config/firebase';
+import  firebase from '../../config/firebase';
 import { signup } from '../../store/actions/authAction';
 import { Spinner } from 'reactstrap';
+import { startTransition } from 'react';
 
 function Signup() {
   const { loading } = useSelector((state) => state?.user);
@@ -68,10 +69,22 @@ function Signup() {
 
   // FireBase Signup With Google 
 
-  const GoogleSignin = () => {
+
+
+const GoogleSignin = async () => {
+    const auth = getAuth(); 
     const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider)
-  }
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            console.log("Firebase sign-in successful:", result.user);
+            // Handle successful sign-in (e.g., update state, call another function)
+        } catch (error) {
+            console.error("Firebase sign-in error:", error);
+            // Handle sign-in errors (e.g., show error message)
+        }
+    };
+
   return (
     <div className="h-full min-h-screen bg-white flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full md:w-[600px]">

@@ -7,28 +7,24 @@ export const signup = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
 
     try {
-        const data = await auth.signup(payload);
-
-        if (data.status === 200 ) {
+        const {data} = await auth.signup(payload);
+        console.log("Data is Hwere",data)
+        if (data?.status === 200) {
             dispatch(loginLoading(false));
             onSuccess();
-            // toast.success(data.status?.details?.details)
-            toast.success("We have sent you an email for OTP")
-            // console.log("Data details is here:", data.details)
-            // dispatch({ type: "LOGIN", payload: data.detail });
+            toast.success(data?.details)
+            
         } else {
             // toast.error(data.data?.detail);
+            console.log("first")
+            toast.warning(data?.message)
+            console.log("Hello Guys")
             dispatch(loginLoading(false));
-            console.log("ARe you in else block")
-            // onError();
-            toast.error(data.status?.message?.message)
-            // console.log("Error while signup: ", data.status?.message?.message)
-            // toast.error("Something went wrong")
         }
     } catch (error) {
-        console.error("Sorry you missing or mismatch some fileds");
+        toast.error(error?.response?.data?.message);
         dispatch(loginLoading(false));
-        toast.error("Something went wrong")
+        // toast.error(error?.response?.data?.details);
     }
 };
 
@@ -40,19 +36,15 @@ export const verifyotp = (payload, onSuccess) => async (dispatch) => {
         const { data } = await auth.verifyotp(payload);
         if (data.status === 200) {
             dispatch(loginLoading(false));
-            toast.success("OTP verified Successfully.");
+            toast.success(data?.details);
             onSuccess();
 
 
             // toast(data.detail);
-        } else {
-            // toast(data.detail);
-            dispatch(loginLoading(false));
-            toast.error("OTP cannot verified.");
-
-        }
+        } 
     } catch (error) {
-        console.error("Sorry!");
+        console.log("Here",error?.response?.data?.details)
+        toast.error(error?.response?.data?.details);
         dispatch(loginLoading(false));
     }
 };
@@ -68,12 +60,9 @@ export const verifyforgetotp = (payload, onSuccess) => async (dispatch) => {
             onSuccess();
             
             toast.success(data?.details);
-        } else {
-            toast.error(data?.details);
-            dispatch(loginLoading(false));
         }
     } catch (error) {
-        console.error("Sorry!");
+        toast.error(error?.response?.data?.message);
         dispatch(loginLoading(false));
     }
 };
@@ -86,12 +75,10 @@ export const forgetPassword = (payload, onSuccess) => async (dispatch) => {
             dispatch(loginLoading(false));
             toast.success("OTP sent to your registered email");
             onSuccess();
-        } else {
-            // toast(data.detail);
-            dispatch(loginLoading(false));
-        }
+        } 
     } catch (error) {
-        console.error("Sorry!");
+        console.log("Error Here",error?.response?.data?.message)
+        toast.error(error?.response?.data?.message);
         dispatch(loginLoading(false));
     }
 };
@@ -106,15 +93,11 @@ export const login = (payload, onSuccess) => async (dispatch) => {
             dispatch({ type: "LOGIN", payload: data.details });
             dispatch(loginLoading(false));
             onSuccess();
-            toast.success("User Login Successfully.");            
-        } else {
-            toast.error(data.details);
-            dispatch(loginLoading(false));
-        }
+            toast.success(data?.details);            
+        } 
     } catch (error) {
-        console.error("Sorry you missing or mismatch some fileds");
         dispatch(loginLoading(false));
-        toast.error("Invalid Credentials")
+        toast.error(error?.response?.data?.message);
     }
 };
 
@@ -129,12 +112,9 @@ export const forgetemail = (payload, onSuccess) => async (dispatch) => {
             onSuccess();
             dispatch(loginLoading(false));
 
-        } else {
-            toast.error(data.details);
-            dispatch(loginLoading(false));
-        }
+        } 
     } catch (error) {
-        console.error("Sorry!");
+        toast.error(error?.response?.data?.message);
         dispatch(loginLoading(false));
     }
 }
@@ -145,7 +125,7 @@ export const logout = (onSuccess) => async (dispatch) => {
         // onSuccess();
         toast.success("Logout Successfully.");
     } catch (error) {
-        toast(error.message);
+        toast.error(error?.response?.data?.message);
     }
 };
 

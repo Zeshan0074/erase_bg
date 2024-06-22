@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup ,getAuth} from 'firebase/auth';
 import React, { useState } from 'react';
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from 'react-icons/fc';
@@ -51,11 +51,20 @@ function Login() {
 
 
   // FireBase Signup With Google 
-
-  const GoogleSignin = () => {
+  const GoogleSignin = async () => {
+    const auth = getAuth(); 
     const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider)
-  }
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            console.log("Firebase sign-in successful:", result.user);
+            // Handle successful sign-in (e.g., update state, call another function)
+        } catch (error) {
+            console.error("Firebase sign-in error:", error);
+            // Handle sign-in errors (e.g., show error message)
+        }
+    };
+
 
 
   return (

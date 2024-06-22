@@ -39,10 +39,11 @@ const plans = [
 const PricingTable = () => {
 
   const dispatch = useDispatch()
-  const  handleProcessing=(id)=>
+  const  handleProcessing=(id,type)=>
     {
       let payload = {
-        PAYPAL_PLAN_ID: id
+        plan_type: type,
+        PAYPAL_PLAN_ID: "P-4A7312506F528401VMZ3LNVQ"
       }
       dispatch(paypalprocessing(payload));
     }
@@ -80,7 +81,7 @@ const PricingTable = () => {
             </div>
 
           </ul>
-          <button className="bg-primary text-white mt-20 w-full py-2 px-4 rounded-full  transition duration-300"  onClick={()=> { handleProcessing(plan.planId) }}>Purchase Now</button>
+          <button className="bg-primary text-white mt-20 w-full py-2 px-4 rounded-full  transition duration-300"  onClick={()=> { handleProcessing(plan.planId,plan.name) }}>Purchase Now</button>
         </div>
       ))}
     </div>
