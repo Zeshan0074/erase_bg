@@ -42,6 +42,7 @@ function Login() {
     };
     dispatch(
       login(payload, () => {
+        
         history.push("/");
       })
     );
