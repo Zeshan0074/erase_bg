@@ -7,9 +7,9 @@ const ApiKeySetup = () => {
       <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
         
         <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
-          <div className="flex justify-between items-center mb-2">
+          <div className="flex gap-y-3 md:flex-row flex-col justify-between items-center mb-2">
             <h2 className="text-xl font-bold">API Keys</h2>
-            <button className="bg-primary text-white font-semibold py-1 px-4 rounded hover:bg-gray-400">
+            <button className="bg-primary text-white text-sm font-semibold py-1 px-4 rounded hover:bg-gray-400">
               Create New Secret Key
             </button>
           </div>
