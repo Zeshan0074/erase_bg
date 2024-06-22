@@ -26,14 +26,14 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="flex flex-col items-center bg-white p-8 rounded-lg shadow-lg w-full md:w-[600px]">
+    <div className="flex items-center justify-center min-h-screen bg-zinc-200">
+      <div className="flex flex-col items-center bg-white p-8 rounded-xl shadow-lg w-full md:w-[600px]">
         
           <div className="text-primary mb-4">
             <SiMinutemailer size={60} />
           </div>
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Enter Your Email</h2>
-          <p className="text-gray-600 mb-6 md:text-lg text-[12px]">Insert Email to Reset Password</p>
+          <p className="text-gray-600 mb-6 md:text-lg text-[12px]">Add Email to Reset Password</p>
           <form onSubmit={handleSubmit} className='w-full'>
             <div className="mb-4">
               <input

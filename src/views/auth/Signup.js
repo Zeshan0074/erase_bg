@@ -73,8 +73,8 @@ function Signup() {
     return signInWithPopup(auth, provider)
   }
   return (
-    <div className="h-full min-h-screen bg-white flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full md:w-[600px]">
+    <div className="h-full min-h-screen bg-zinc-300  flex items-center justify-center">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full md:w-[600px]">
         <h2 className="text-2xl font-bold mb-6 text-center text-primary">Signup</h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4">

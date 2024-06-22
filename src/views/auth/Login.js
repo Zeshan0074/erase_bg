@@ -60,8 +60,8 @@ function Login() {
 
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full md:w-[600px]">
+    <div className="min-h-screen bg-zinc-300 flex items-center justify-center">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full md:w-[600px]">
         <h2 className="text-2xl font-bold mb-6 text-center text-primary">Login</h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4">

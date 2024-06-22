@@ -19,7 +19,7 @@ const Main = (props) => {
         <div>
           <Navbar />
         </div>
-        <div className="max-w-[2300px] mt-[50px] flex flex-row justify-between ">
+        <div className="max-w-[2300px] mt-[75px] flex flex-row justify-between ">
           <div className={`${Navbar === true ? "w-0" : "md:w-56"}  h-full`}>
             <Sidebar />
           </div>

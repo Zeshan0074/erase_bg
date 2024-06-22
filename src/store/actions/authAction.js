@@ -16,12 +16,12 @@ export const signup = (payload, onSuccess) => async (dispatch) => {
             toast.success(data?.details)
         } else {
             dispatch(loginLoading(false));
-            toast.error(data.status?.message?.message)
+            toast.error(data?.details)
         }
     } catch (error) {
         console.error("Sorry you missing or mismatch some fileds");
         dispatch(loginLoading(false));
-        toast.error("Something went wrong")
+        // toast.error("Something went wrong")
     }
 };
 
