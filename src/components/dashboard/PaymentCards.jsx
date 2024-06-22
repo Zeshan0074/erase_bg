@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Starter from "../../assets/img/Starter.png";
 import Plus from "../../assets/img/Plus.png";
 import Premium from "../../assets/img/Premium.png";
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import { paypalprocessing } from '../../store/actions/paypalAction'
+import { useDispatch } from 'react-redux';
 
 const plans = [
   {
     name: 'Starter',
     price: '5',
+    planId: "P-6DN59517TY1856246MZ2VIQA",
     email: "15 email accounts",
     space: "100GB Space",
     img: Starter,
@@ -16,6 +19,7 @@ const plans = [
   {
     name: 'Plus',
     price: '15',
+    planId: "P-6DN59517TY1856246MZ2VIQA",
     email: "15 email accounts",
     space: "100GB Space",
     img: Plus,
@@ -24,6 +28,7 @@ const plans = [
   {
     name: 'Premium',
     price: '25',
+    planId: "P-6DN59517TY1856246MZ2VIQA",
     email: "15 email accounts",
     space: "100GB Space",
     img: Premium,
@@ -32,8 +37,19 @@ const plans = [
 ];
 
 const PricingTable = () => {
+
+  const dispatch = useDispatch()
+  const  handleProcessing=(id)=>
+    {
+      let payload = {
+        PAYPAL_PLAN_ID: id
+      }
+      dispatch(paypalprocessing(payload));
+    }
   return (
-    <div className="flex flex-wrap gap-6 pt-6 justify-center items-center min-h-screen bg-gray-100 w-full">
+    <>
+    
+    <div className="flex flex-wrap gap-6 justify-center items-center min-h-screen bg-gray-100  w-full">
       {plans.map((plan, index) => (
         <div
           key={index}
@@ -64,11 +80,12 @@ const PricingTable = () => {
             </div>
 
           </ul>
-          <button className="bg-primary text-white mt-20 w-full py-2 px-4 rounded-full transition duration-300">Purchase Now</button>
+          <button className="bg-primary text-white mt-20 w-full py-2 px-4 rounded-full  transition duration-300"  onClick={()=> { handleProcessing(plan.planId) }}>Purchase Now</button>
         </div>
       ))}
     </div>
-  );
-};
+    </>
+  )
+}
 
 export default PricingTable;
