@@ -19,7 +19,7 @@ const plans = [
   {
     name: 'Plus',
     price: '15',
-    planId: "P-6DN59517TY1856246MZ2VIQA",
+    planId: "P-4CF81880KA538483WMZ2VLEI",
     email: "15 email accounts",
     space: "100GB Space",
     img: Plus,
@@ -28,7 +28,7 @@ const plans = [
   {
     name: 'Premium',
     price: '25',
-    planId: "P-6DN59517TY1856246MZ2VIQA",
+    planId: "P-5FP81021T07715908MZ2VMBY",
     email: "15 email accounts",
     space: "100GB Space",
     img: Premium,
