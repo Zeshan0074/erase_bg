@@ -7,87 +7,59 @@ export const signup = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
 
     try {
-        const {data} = await auth.signup(payload);
-        console.log("Data is Hwere",data)
+        const { data } = await auth.signup(payload);
+        console.log("Data is Hwere", data)
         if (data?.status === 200) {
             dispatch(loginLoading(false));
             onSuccess();
             toast.success(data?.details)
-            
+
         } else {
-            // toast.error(data.data?.detail);
-            console.log("first")
-            toast.warning(data?.message)
-            console.log("Hello Guys")
+            toast.error(data?.message)
             dispatch(loginLoading(false));
         }
     } catch (error) {
         toast.error(error?.response?.data?.message);
         dispatch(loginLoading(false));
-        // toast.error(error?.response?.data?.details);
     }
 };
-
-// export const signup = (payload, onSuccess) => async (dispatch) => {
-//     dispatch(loginLoading(true));
-
-//     try {
-//         const { data } = await auth.signup(payload);
-
-//         if (data.status === 200) {
-//             dispatch(loginLoading(false));
-//             onSuccess();
-//             toast.success(data?.details);
-//         } else {
-//             dispatch(loginLoading(false));
-//             toast.error(data?.message);
-//         }
-//     } catch (error) {
-//         dispatch(loginLoading(false));
-        
-//         // Check if the error response has a message from the backend
-//         if (data.message) {
-//             toast.error(data.message);
-//         } else {
-//             // toast.error("Something went wrong. Please try again.");
-//         }
-//     }
-// };
-
 
 // THis actiin is for VerifyOTP
 export const verifyotp = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
-        const { data} = await auth.verifyotp(payload);
+        const { data } = await auth.verifyotp(payload);
         if (data.status === 200) {
             dispatch(loginLoading(false));
             toast.success(data?.details);
             onSuccess();
-            toast.success(data?.details);
+        }
+        else {
+            toast.error(data?.message)
+            dispatch(loginLoading(false));
+        }
 
-
-            // toast(data.detail);
-        } 
     } catch (error) {
-        console.log("Here",error?.response?.data?.details)
+        console.log("Here", error?.response?.data?.details)
         toast.error(error?.response?.data?.details);
         dispatch(loginLoading(false));
-        // toast.error("OTP cannot verify")
     }
 };
 // THis actioin is for VerifyOTP
 export const verifyforgetotp = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
-        const {data} = await auth.verifyforgetotp(payload);
-        console.log("Data of Forget",data)
+        const { data } = await auth.verifyforgetotp(payload);
+        console.log("Data of Forget", data)
         if (data.status === 200) {
             dispatch(loginLoading(false));
-            // toast.status()
             onSuccess();
-            
+
             toast.success(data?.details);
+        }
+        else {
+            dispatch(loginLoading(false));
+            toast.error(data?.details)
         }
     } catch (error) {
         toast.error(error?.response?.data?.message);
@@ -98,14 +70,19 @@ export const verifyforgetotp = (payload, onSuccess) => async (dispatch) => {
 export const forgetPassword = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
-        const {data} = await auth.forgetPassword(payload);
+        const { data } = await auth.forgetPassword(payload);
         if (data?.status === 200) {
             dispatch(loginLoading(false));
-            toast.success("OTP sent to your registered email");
+            toast.success(data?.message);
             onSuccess();
-        } 
+        }
+        else {
+            dispatch(loginLoading(false));
+            toast.error(data?.message)
+
+        }
     } catch (error) {
-        console.log("Error Here",error?.response?.data?.message)
+        console.log("Error Here", error?.response?.data?.message)
         toast.error(error?.response?.data?.message);
         dispatch(loginLoading(false));
     }
@@ -116,15 +93,17 @@ export const forgetPassword = (payload, onSuccess) => async (dispatch) => {
 export const login = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
-        const {data} = await auth.login(payload);
-        if (data?.status === 200 ) { 
+        const { data } = await auth.login(payload);
+        if (data?.status === 200) {
             dispatch({ type: "LOGIN", payload: data.details });
             dispatch(loginLoading(false));
-            toast.success(data?.message) 
-              
             onSuccess();
-            toast.success(data?.details);            
-        } 
+            // toast.success(data?.details);            
+        }
+        else {
+            toast.error(data?.details)
+            dispatch(loginLoading(false));
+        }
     } catch (error) {
         dispatch(loginLoading(false));
         toast.error(error?.response?.data?.message);
@@ -136,13 +115,17 @@ export const login = (payload, onSuccess) => async (dispatch) => {
 export const forgetemail = (payload, onSuccess) => async (dispatch) => {
     await dispatch(loginLoading(true));
     try {
-        const {data} = await auth.forgetemail(payload);
+        const { data } = await auth.forgetemail(payload);
         if (data?.status === 200) {
             toast.success(data?.details);
             onSuccess();
             dispatch(loginLoading(false));
 
-        } 
+        }
+        else {
+            toast.error(data?.details)
+            dispatch(loginLoading(false));
+        }
     } catch (error) {
         toast.error(error?.response?.data?.message);
         dispatch(loginLoading(false));
