@@ -24,7 +24,8 @@ const Main = (props) => {
             <Sidebar />
           </div>
           <div className="overflow-auto w-full h-full z-10">
-            <AdminView /> {/* Render AdminView here */}
+            {/* <AdminView /> Render AdminView here */}
+            {props.children}
           </div>
         </div>
       </div>
