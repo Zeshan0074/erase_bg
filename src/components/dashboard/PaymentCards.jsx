@@ -4,8 +4,7 @@ import Plus from "../../assets/img/Plus.png";
 import Premium from "../../assets/img/Premium.png";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { paypalprocessing } from '../../store/actions/paypalAction'
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 const plans = [
   {
     name: 'Starter',
@@ -19,7 +18,7 @@ const plans = [
   {
     name: 'Plus',
     price: '15',
-    planId: "P-4CF81880KA538483WMZ2VLEI",
+    planId: "P-4CF81880KA538483WMZ2VLEI", 
     email: "15 email accounts",
     space: "100GB Space",
     img: Plus,
@@ -37,14 +36,17 @@ const plans = [
 ];
 
 const PricingTable = () => {
-
+  
+  const { user } = useSelector((state) => state.authUser);
   const dispatch = useDispatch()
   const  handleProcessing=(id,type)=>
     {
       let payload = {
+        Bearer: user?.token,
         plan_type: type,
         PAYPAL_PLAN_ID: "P-4A7312506F528401VMZ3LNVQ"
       }
+      console.log("Sub>>>>>",payload)
       dispatch(paypalprocessing(payload));
     }
   return (
