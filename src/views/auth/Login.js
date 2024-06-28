@@ -39,6 +39,7 @@ function Login() {
     let payload = {
       email: userDetails.email,
       password: userDetails.password,
+      provider:"NormalAuth"
     };
     dispatch(
       login(payload, () => {
@@ -56,14 +57,20 @@ function Login() {
     const auth = getAuth(); 
     const provider = new GoogleAuthProvider();
 
-        try {
             const result = await signInWithPopup(auth, provider);
-            console.log("Firebase sign-in successful:", result.user);
-            // Handle successful sign-in (e.g., update state, call another function)
-        } catch (error) {
-            console.error("Firebase sign-in error:", error);
-            // Handle sign-in errors (e.g., show error message)
-        }
+            console.log("Firebase sign-in successful:", result?.user?.email);
+
+           
+    let payload = {
+      email:  result?.user?.email,
+      provider:"Google"
+    };
+    dispatch(
+      login(payload, () => {
+        
+        history.push("/");
+      })
+    );
     };
 
 

@@ -5,11 +5,9 @@ import toast from 'react-hot-toast';
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { FcGoogle } from "react-icons/fc";
-import  firebase from '../../config/firebase';
 import { signup } from '../../store/actions/authAction';
 import { Spinner } from 'reactstrap';
-import { startTransition } from 'react';
-
+import { login } from '../../store/actions/authAction';
 function Signup() {
   const { loading } = useSelector((state) => state?.user);
   const initialState = {
@@ -71,20 +69,26 @@ function Signup() {
 
 
 
-const GoogleSignin = async () => {
+  // FireBase Signup With Google 
+  const GoogleSignin = async () => {
     const auth = getAuth(); 
     const provider = new GoogleAuthProvider();
 
-        try {
             const result = await signInWithPopup(auth, provider);
-            console.log("Firebase sign-in successful:", result.user);
-            // Handle successful sign-in (e.g., update state, call another function)
-        } catch (error) {
-            console.error("Firebase sign-in error:", error);
-            // Handle sign-in errors (e.g., show error message)
-        }
-    };
+            console.log("Firebase sign-in successful:", result?.user?.email);
 
+           
+    let payload = {
+      email:  result?.user?.email,
+      provider:"Google"
+    };
+    dispatch(
+      login(payload, () => {
+        
+        history.push("/");
+      })
+    );
+    };
   return (
     <div className="h-full min-h-screen bg-zinc-300  flex items-center justify-center">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full md:w-[600px]">
