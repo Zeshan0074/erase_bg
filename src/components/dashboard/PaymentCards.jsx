@@ -115,11 +115,11 @@ const PricingTable = () => {
 
 
   return (
-    <div className="flex flex-wrap gap-6 justify-center items-center min-h-screen bg-gray-100 w-full">
+    <div className="flex flex-wrap pt-6 gap-6 justify-center items-center min-h-screen bg-gray-100 w-full">
       {plans.map((plan, index) => (
         <div
           key={index}
-          className={`border-[0.1px] rounded-2xl shadow-sm hover:transform md:hover:scale-105 duration-300 delay-200 px-6 py-4 w-[300px] md:w-[320px] lg:w-[370px] max-w-sm text-center h-full ${index === 1 ? 'bg-white' : index === 0 || index === 2 ? 'bg-transparent' : 'hover:bg-white'
+          className={`border-[0.1px] rounded-2xl shadow-sm hover:transform md:hover:scale-95 duration-300 delay-200 px-6 py-4 w-[300px] md:w-[320px] lg:w-[370px] max-w-sm text-center h-full ${index === 1 ? 'bg-white' : index === 0 || index === 2 ? 'bg-transparent' : 'hover:bg-white'
             }`}
         >
           <div className="flex justify-center items-center w-full">
