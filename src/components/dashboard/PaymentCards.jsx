@@ -18,7 +18,7 @@ const plans = [
   {
     name: 'Plus',
     price: '15',
-    planId: "P-4CF81880KA538483WMZ2VLEI", 
+    planId: "P-4CF81880KA538483WMZ2VLEI",
     email: "15 email accounts",
     space: "100GB Space",
     img: Plus,
@@ -38,7 +38,8 @@ const plans = [
 const PricingTable = () => {
   const { user } = useSelector((state) => state.authUser);
   const [subscription, setSubscription] = useState("");
- 
+  const [subscriptionId, setSubscriptionId] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,13 +50,15 @@ const PricingTable = () => {
             'Content-Type': 'application/json'
           }
         });
-        
+
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
 
         const responseData = await response.json();
         setSubscription(responseData?.plan?.name);
+        setSubscriptionId(responseData?.subscription?.subscription_id)
+        console.log("SubscriptionId", responseData?.subscription?.subscription_id)
       } catch (error) {
         console.error('Error fetching data: ', error);
       }
@@ -71,9 +74,12 @@ const PricingTable = () => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${user?.token}`
-        }
+        },
+        body: JSON.stringify({
+          plan_type: planName,
+            PAYPAL_PLAN_ID: "P-4A7312506F528401VMZ3LNVQ",
+        })
       });
-
       if (!response.ok) {
         throw new Error('Network response was not ok.');
       }
@@ -90,6 +96,23 @@ const PricingTable = () => {
       console.error("Error occurred during PayPal processing:", error);
     }
   };
+
+
+  const cancelSubscription = async () => {
+    try {
+      const response = await fetch('https://amazingly-sought-snapper.ngrok-free.app/RemoveBG/cancelsubscriptions/',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({subscriptionid : subscriptionId})
+        });
+      if (!response.ok) { throw new Error('Network response was not ok.'); }
+      const data = await response.json();
+      console.log('Subscription cancelled successfully:', data);
+    }
+    catch (error) { console.error('Failed to cancel subscription:', error); }
+  };
+
 
   return (
     <div className="flex flex-wrap gap-6 justify-center items-center min-h-screen bg-gray-100 w-full">
@@ -120,12 +143,12 @@ const PricingTable = () => {
               <li className="text-gray-500 text-start pl-4 font-semibold mb-2">{plan.space}</li>
             </div>
           </ul>
-          <button 
-  className={`mt-20 w-full py-2 px-4 rounded-full transition duration-300 ${subscription === plan.name ? 'bg-red-500' : 'bg-primary'} text-white`}
-  onClick={() => handleProcessing(plan.planId, plan.name)}
->
-  {!subscription ? "Purchase" : (subscription === plan.name ? "Cancel" : "Update")}
-</button>
+          <button
+            className={`mt-20 w-full py-2 px-4 rounded-full transition duration-300 ${subscription === plan.name ? 'bg-red-500' : 'bg-primary'} text-white`}
+            onClick={() => subscription === plan.name ? cancelSubscription() : handleProcessing(plan.planId, plan.name)}
+          >
+            {!subscription ? "Purchase" : (subscription === plan.name ? "Cancel" : "Update")}
+          </button>
         </div>
       ))}
     </div>
