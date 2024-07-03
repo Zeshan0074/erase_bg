@@ -1,15 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {  useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { MdMarkEmailUnread } from "react-icons/md";
-import { verifyforgetotp } from '../../store/actions/authAction';
+import { forgetemail, verifyforgetotp } from '../../store/actions/authAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from 'reactstrap';
-const VerifyEmail = () => {
 
+const VerifyEmail = () => {
   const { loading } = useSelector((state) => state?.user);
   const [code, setCode] = useState(['', '', '', '']);
   const inputRefs = useRef([]);
-
   const [email, setEmail] = useState();
 
   useEffect(() => {
@@ -18,6 +17,7 @@ const VerifyEmail = () => {
       setEmail(storedEmail);
     }
   }, []);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -54,8 +54,18 @@ const VerifyEmail = () => {
       })
     );
   };
+
+  const handleResend = (e) => {
+    e.preventDefault();
+    const payload = {
+      email: email,
+      otp: '', // Empty OTP to indicate resend request
+    };
+    dispatch(forgetemail(payload, () => {}));
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen  bg-zinc-300 ">
+    <div className="flex items-center justify-center min-h-screen bg-zinc-300">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full md:w-[600px]">
         <div className="flex flex-col items-center justify-center">
           <div className="text-primary mb-4">
@@ -63,11 +73,8 @@ const VerifyEmail = () => {
           </div>
           <h2 className="text-2xl font-bold mb-2 text-gray-800">Please check your email</h2>
           <p className="text-gray-600 mb-6">We've sent a reset password code</p>
-          <form onSubmit={(e)=>{handleSubmit(e)}}>
+          <form onSubmit={handleSubmit}>
             <div className="flex space-x-2 mb-6 w-full justify-center items-center">
-
-
-
               {code.map((num, index) => (
                 <input
                   key={index}
@@ -83,21 +90,21 @@ const VerifyEmail = () => {
             </div>
             <div className="text-gray-600 mb-4">
               Didn't get the code?{' '}
-              <a href="#" className="text-primary underline">
+              <button
+                onClick={handleResend}
+                className="text-primary border-0 underline">
                 Click to resend
-              </a>
+              </button>
             </div>
-            {/* <Link to="/auth/login" className="w-full"> */}
             <button
               type='submit'
               className="bg-primary text-white w-full font-semibold text-lg px-4 py-2 rounded-lg hover:bg-primary focus:outline-none focus:ring-2 focus:ring-primary">
-                           {loading ? <Spinner size="sm" /> : "Verify"}
+              {loading ? <Spinner size="sm" /> : "Verify"}
             </button>
-            {/* </Link> */}
           </form>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
